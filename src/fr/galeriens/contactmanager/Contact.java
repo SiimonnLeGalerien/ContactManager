@@ -12,7 +12,7 @@ public class Contact {
 	 * Default constructor creates empty contact
 	 */
 	public Contact() {
-		this("", "", "");
+		this("00 00 00 00 00", "NoName", "empty@email.com");
 	}
 	
 	/**
@@ -21,7 +21,7 @@ public class Contact {
 	 * @param number Contact's telephone number
 	 */
 	public Contact(String number) {
-		this(number, "", "");
+		this(number, "NoName", "empty@email.com");
 	}
 	
 	/**
@@ -31,7 +31,7 @@ public class Contact {
 	 * @param name Contact's name
 	 */
 	public Contact(String number, String name) {
-		this(number, name, "");
+		this(number, name, "empty@email.com");
 	}
 	
 	/**
@@ -46,19 +46,19 @@ public class Contact {
 		if (isValidPhoneNumber(number)) {
 			this.number = number;
 		} else {
-			this.number = "invalid number";
+			this.number = "00 00 00 00 00";
 		}
 			
 		if (isValidName(name)) {
 			this.name = name;
 		} else {
-			this.name = "invalid name";
+			this.name = "invalidName";
 		}
 		
 		if (isValidEmail(email)) {
 			this.email = email;
 		} else {
-			this.email = "invalid email";
+			this.email = "invalid@email.com";
 		}
 	}
 	// Validations methods
