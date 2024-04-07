@@ -43,22 +43,59 @@ public class Contact {
 	 */
 	public Contact(String number, String name, String email) {
 		
-		this.number = number;
-		this.name = name;
-		this.email = email;
+		if (isValidPhoneNumber(number)) {
+			this.number = number;
+		} else {
+			this.number = "invalid number";
+		}
+			
+		if (isValidName(name)) {
+			this.name = name;
+		} else {
+			this.name = "invalid name";
+		}
+		
+		if (isValidEmail(email)) {
+			this.email = email;
+		} else {
+			this.email = "invalid email";
+		}
 	}
-	
+	// Validations methods
+
+    private boolean isValidPhoneNumber(String number) {
+        // phone number's regular expression
+        String regex = "^[+]?[0-9 ]+$";
+        return number.matches(regex);
+    }
+
+    private boolean isValidName(String name) {
+        // name's regular expression
+        String regex = "^[a-zA-Z\\s-']+$";
+        return name.matches(regex);
+    }
+
+    private boolean isValidEmail(String email) {
+        // email's regular expression
+        String regex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$";
+        return email.matches(regex);
+    }
+    
 	//SETTERS
 	public void setNumber(String number) {
-		this.number = number;
+		if (isValidPhoneNumber(number))
+			this.number = number;
+		
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		if (isValidName(name))
+			this.name = name;
 	}
 	
 	public void setEmail(String email) {
-		this.email = email;
+		if (isValidEmail(email))
+			this.email = email;
 	}
 	
 	//GETTERS
