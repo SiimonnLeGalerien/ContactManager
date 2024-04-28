@@ -21,7 +21,13 @@ public class Contact {
 	 * @param number Contact's telephone number
 	 */
 	public Contact(String number) {
-		this(number, "NoName", "empty@email.com");
+		if (isValidPhoneNumber(number)) {
+			this.number = number;
+		} else {
+			this.number = "00 00 00 00 00";
+		}
+		this.name = "NoName";
+		this.email = "empty@email.com";
 	}
 	
 	/**
@@ -31,7 +37,18 @@ public class Contact {
 	 * @param name Contact's name
 	 */
 	public Contact(String number, String name) {
-		this(number, name, "empty@email.com");
+		if (isValidPhoneNumber(number)) {
+			this.number = number;
+		} else {
+			this.number = "00 00 00 00 00";
+		}
+			
+		if (isValidName(name)) {
+			this.name = name;
+		} else {
+			this.name = "invalidName";
+		}
+		this.email = "empty@email.com";
 	}
 	
 	/**
@@ -77,7 +94,7 @@ public class Contact {
 
     private boolean isValidEmail(String email) {
         // email's regular expression
-        String regex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$";
+        String regex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,63}$";
         return email.matches(regex);
     }
     
@@ -114,5 +131,12 @@ public class Contact {
 	@Override
 	public String toString() {
 		return name + " : " + number + " | " + email;
+	}
+	/**
+	 * format Contact to saving
+	 * @return formatted String
+	 */
+	public String toSave() {
+		return name+","+number+","+email;
 	}
 }
