@@ -26,7 +26,7 @@ public class Contact {
 		} else {
 			this.number = "00 00 00 00 00";
 		}
-		this.name = "NoName";
+		this.name = "no name";
 		this.email = "empty@email.com";
 	}
 	
@@ -46,7 +46,7 @@ public class Contact {
 		if (isValidName(name)) {
 			this.name = name;
 		} else {
-			this.name = "invalidName";
+			this.name = "invalid name";
 		}
 		this.email = "empty@email.com";
 	}
@@ -66,10 +66,10 @@ public class Contact {
 			this.number = "00 00 00 00 00";
 		}
 			
-		if (isValidName(name)) {
-			this.name = name;
+		if (isValidName(name.toLowerCase())) {
+			this.name = name.toLowerCase();
 		} else {
-			this.name = "invalidName";
+			this.name = "invalid name";
 		}
 		
 		if (isValidEmail(email)) {
@@ -77,6 +77,24 @@ public class Contact {
 		} else {
 			this.email = "invalid@email.com";
 		}
+	}
+	
+	private static String capitalize(String s) {
+		char[] array = s.toCharArray();
+		char upperLetter = Character.toUpperCase(array[0]);
+		array[0] = upperLetter;
+		return String.valueOf(array);
+		
+	}
+	
+	private static String capitalizeAll(String s) {
+		String[] strArray = s.split(" ");
+		String str = "";
+		for (int i = 0; i < strArray.length ; i++)
+			str = str.concat(capitalize(strArray[i]).concat(" "));
+		
+		
+		return str;
 	}
 	// Validations methods
 
@@ -106,8 +124,8 @@ public class Contact {
 	}
 	
 	public void setName(String name) {
-		if (isValidName(name))
-			this.name = name;
+		if (isValidName(name.toLowerCase()))
+			this.name = name.toLowerCase();
 	}
 	
 	public void setEmail(String email) {
@@ -130,7 +148,9 @@ public class Contact {
 	
 	@Override
 	public String toString() {
-		return name + " : " + number + " | " + email;
+		String capitalizedName = capitalizeAll(name);
+		String result = "".concat(capitalizedName).concat(" : ").concat(number).concat(" | ").concat(email);
+		return result;
 	}
 	/**
 	 * format Contact to saving

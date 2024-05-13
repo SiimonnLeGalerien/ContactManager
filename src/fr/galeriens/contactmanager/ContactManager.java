@@ -68,7 +68,7 @@ public class ContactManager {
 	 * @param email Contact's Email
 	 */
 	public void add(String number, String name, String email) {
-		list.add(new Contact(number, name, email));
+		list.add(new Contact(number, name.toLowerCase(), email));
 		map.put(name.toLowerCase(), new Contact(number, name, email));
 	}
 	
@@ -95,15 +95,15 @@ public class ContactManager {
 	 * @return Success Statement
 	 */
 	public boolean remove(String name) {
-		map.containsKey(name);
-		int id = getIdByName(name);
+		map.containsKey(name.toLowerCase());
+		int id = getIdByName(name.toLowerCase());
 		if ( id != -1) {
 			list.remove(id);
+			map.remove(name.toLowerCase());
 			return true;
 		} else {
 			return false;
 		}
-			
 	}
 	
 	/**
@@ -113,7 +113,7 @@ public class ContactManager {
 	 */
 	public int getIdByName(String name) {
 		for (int i = 0; i < list.size(); i++) {
-			if (name.equals(list.get(i).getName()))
+			if (name.toLowerCase().equals(list.get(i).getName().toLowerCase()))
 				return i;
 			
 		}
