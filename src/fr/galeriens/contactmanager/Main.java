@@ -25,7 +25,6 @@ public class Main {
             System.out.print("Choisissez une option: ");
 
             int choice = Integer.parseInt(reader.readLine());
-            reader.readLine();
             switch (choice) {
                 case 1:
                     addContact();
